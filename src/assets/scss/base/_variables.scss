@@ -1,0 +1,27 @@
+:root
+{
+  --color-g-bg: #0D0714;
+  --color-list-bg: #1D1825;
+  --color-dark: #15101C;
+  --color-accent: #9E78CF;
+  --color-gray: #777777;
+  --color-light: #FFFFFF;
+  --color-green: #78CFB0;
+
+  --border: 1px solid var(--color-accent);
+  --border-radius: 10px;
+  --border-radius-large: 20px;
+
+  --font-family-base: 'Inter', sans-serif;
+
+  --container-width: 600px;
+  --container-padding-x: 0;
+
+  --section-padding-y: 30px;
+
+  --input-height: 40px;
+  --button-height: 30px;
+  --button-input-height: 40px;
+
+  --transition-duration: 0.4s;
+}

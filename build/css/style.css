@@ -1,0 +1,449 @@
+@charset "UTF-8";
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями
+ */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+}
+
+/**
+  Плавный скролл
+ */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+ */
+svg *[fill] {
+  fill: currentColor;
+}
+
+svg *[stroke] {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/src/assets/fonts/Inter-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Inter", sans-serif;
+}
+
+h4,
+.h4 {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.completed {
+  color: var(--color-green) !important;
+  text-decoration: line-through !important;
+}
+
+:root {
+  --color-g-bg: #0D0714;
+  --color-list-bg: #1D1825;
+  --color-dark: #15101C;
+  --color-accent: #9E78CF;
+  --color-gray: #777777;
+  --color-light: #FFFFFF;
+  --color-green: #78CFB0;
+  --border: 1px solid var(--color-accent);
+  --border-radius: 10px;
+  --border-radius-large: 20px;
+  --font-family-base: "Inter", sans-serif;
+  --container-width: 600px;
+  --container-padding-x: 0;
+  --section-padding-y: 30px;
+  --input-height: 40px;
+  --button-height: 30px;
+  --button-input-height: 40px;
+  --transition-duration: 0.4s;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+.section {
+  padding: var(--section-padding-y) 0;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  -webkit-clip-path: inset(100%) !important;
+          clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 767px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .visible-mobile {
+    display: none !important;
+  }
+}
+
+.none {
+  display: none !important;
+}
+
+#empty-list {
+  justify-content: center;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-weight: 400;
+  line-height: 1.28;
+  color: var(--color-light);
+  background-color: var(--color-g-bg);
+}
+
+a,
+button,
+input,
+textarea,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.g-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: var(--color-accent);
+  background-color: transparent;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.g-button:hover {
+  color: var(--color-dark);
+  background-color: var(--color-accent);
+  border-radius: var(--border-radius);
+}
+.g-button svg {
+  pointer-events: none;
+}
+
+.form-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-light);
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+.form-button:hover {
+  color: var(--color-accent);
+  background-color: var(--color-light);
+}
+
+.button-del-main {
+  width: 100%;
+  padding: 5px;
+  background-color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+.button-del-main:hover {
+  color: var(--color-accent);
+  background-color: var(--color-dark);
+  border: 1px solid var(--color-accent);
+}
+
+.g-input {
+  padding: 10px 15px;
+  color: var(--color-light);
+  background-color: transparent;
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  row-gap: 60px;
+  padding: 50px;
+  margin-top: 100px;
+  width: 100%;
+  background-color: var(--color-list-bg);
+  border: none;
+  border-radius: var(--border-radius-large);
+}
+.todo__new {
+  width: 100%;
+}
+.todo__new-form {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+  width: 100%;
+}
+.todo__new-label {
+  width: 100%;
+}
+.todo__new-input {
+  width: 100%;
+}
+.todo__tasks {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  row-gap: 15px;
+  width: 100%;
+}
+.todo__tasks--done {
+  background-color: rgb(194, 255, 194) !important;
+}
+.todo__tasks--delete {
+  background-color: rgb(255, 175, 175) !important;
+}
+.todo__tasks-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  width: 100%;
+}
+.todo__tasks-item {
+  height: 110%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: var(--color-accent);
+  background-color: var(--color-dark);
+  border: none;
+  border-radius: var(--border-radius);
+}
+.todo__tasks-buttons-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+}
+.todo__tasks-content {
+  max-width: 385px;
+  overflow: hidden;
+}
+.todo__tasks-content--done {
+  color: var(--color-green) !important;
+  text-decoration: line-through !important;
+}
+.todo__done {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  row-gap: 15px;
+  width: 100%;
+}
+.todo__done-container {
+  width: 100%;
+}
+.todo__done-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  width: 100%;
+}
+.todo__done-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  color: var(--color-green);
+  text-decoration: line-through;
+  background-color: var(--color-dark);
+  border: none;
+  border-radius: var(--border-radius);
+}
+.todo__done-buttons-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+}
+.todo__done-content {
+  max-width: 300px;
+  overflow: hidden;
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,149 @@
+.todo
+{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  row-gap: 60px;
+  padding: 50px;
+  margin-top: 100px;
+  width: 100%;
+  // height: 80vh;
+  background-color: var(--color-list-bg);
+  border: none;
+  border-radius: var(--border-radius-large);
+
+  &__new
+  {
+    width: 100%;
+
+    &-form
+    {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 15px;
+      width: 100%;
+    }
+
+    &-label
+    {
+      width: 100%;
+    }
+
+    &-input
+    {
+      width: 100%;
+    }
+  }
+
+  &__tasks
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    row-gap: 15px;
+    width: 100%;
+
+    &--done
+    {
+      background-color: rgb(194, 255, 194) !important;    
+    }
+
+    &--delete
+    {
+      background-color: rgb(255, 175, 175) !important;    
+    }
+
+    &-list  
+    {
+      display: flex;
+      flex-direction: column;
+      row-gap: 15px;
+      width: 100%;
+    }
+
+    &-item
+    {
+      height: 110%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      color: var(--color-accent);
+      background-color: var(--color-dark);
+      border: none;
+      border-radius: var(--border-radius);
+    }
+
+    &-buttons-list
+    {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 5px;
+    }
+
+    &-content
+    {
+      max-width: 385px;
+      overflow: hidden;
+
+      &--done
+      {
+        color: var(--color-green) !important;
+        text-decoration: line-through !important;    
+      }
+    }
+  }
+
+  &__done
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    row-gap: 15px;
+    width: 100%;
+
+    &-container
+    {
+      width: 100%;
+    }
+
+    &-list  
+    {
+      display: flex;
+      flex-direction: column;
+      row-gap: 15px;
+      width: 100%;
+    }
+
+    &-item
+    {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      width: 100%;
+      color: var(--color-green);
+      text-decoration: line-through;
+      background-color: var(--color-dark);
+      border: none;
+      border-radius: var(--border-radius);
+    }
+
+    &-buttons-list
+    {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 5px;
+    }
+
+    &-content
+    {
+      max-width: 300px;
+      overflow: hidden;
+    }
+  }
+}
